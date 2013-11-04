@@ -36,3 +36,7 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 end
+
+Webrat.configure do |config|
+config.mode = :rails
+end
