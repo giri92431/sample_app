@@ -8,6 +8,7 @@
    <![endif]-->
   <%= stylesheet_link_tag'blueprint/screen',:media => 'screen'%>
  <%= stylesheet_link_tag'blueprint/screen',:media => 'print'%>
+<%= stylesheet_link_tag'custom',:media =>'screen'%>
 </head>
 <body>
 
@@ -25,7 +26,10 @@
 </nav>
 </header>
 <section class ="round">
-</section>
+
+
 <%= yield %>
+</section>
+</div>
 </body>
 </html>
