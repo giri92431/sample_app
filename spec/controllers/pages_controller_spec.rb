@@ -3,6 +3,10 @@ require 'spec_helper'
 describe PagesController do
  render_views
 
+before(:each)do
+ @base_title ="Ruby on rails tutorial sample app"
+end
+
   describe "GET 'home'" do
     it "returns http success" do
       get 'home'
@@ -12,9 +16,9 @@ describe PagesController do
 
    it"should have the rit title"do
    get 'home'
-    response.should have_selector("title",:content => "{@base_title} | Home")
+    response.should have_selector("title",:content => "#{@base_title} | Home")
    end
- end
+ 
   
   it "should have a non balnk content" do
   get 'home'
@@ -31,7 +35,7 @@ end
 
      it"should have the rit title"do
    get 'contact'
-    response.should have_selector("title",:content => "#{@base_title} |Contact")
+    response.should have_selector("title",:content => "#{@base_title} | Contact")
    end
   end
  
@@ -63,3 +67,5 @@ end
     response.should have_selector("title",:content => "#{@base_title} | Help")
    end
   end
+end
+
