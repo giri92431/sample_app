@@ -9,4 +9,8 @@ def title
  "#{base_title} | #{@title}"
  end
 end
+def logo 
+ image_tag("logo.png",:alt =>"sapmle app",:class =>"round")
+end 
+
 end
