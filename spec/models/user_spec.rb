@@ -58,6 +58,7 @@ user_with_dublicate_email=User.new(@attr)
 user_with_dublicate_email.should_not be_valid
 end
 
+#-----------------------------------------------------
 describe "password should have a password" do
  
 before(:each)do
@@ -74,7 +75,9 @@ it "should have apssword conf "do
 end
 end
 
-describe "pasword validation "do
+
+#-----------------------------------------------------
+describe "password validation "do
  
 
 it "should aquire password"do
@@ -101,15 +104,61 @@ User.new(hash).should_not be_valid
 end
 end
 
-
+#-----------------------------------------------------
 describe "password encription"do
+
 before (:each)do
 @user=User.create!(@attr)
 end
 
-it "should have an incripted password attribue" do
+it "should have an eincripted password attribue" do
 @user.should respond_to(:encrypted_password)
+end
 
+it "should set encript passqord attribut" do
+@user.encrypted_password.should_not be_blank
+end
+
+it"should have a salt "do
+@user.should respond_to(:salt)
+end
+
+#----------------------------------------------------------
+describe"has password method"do
+
+it"should exist"do
+@user.should respond_to(:has_password?)
+end
+
+it "should return true if the password match" do
+@user.has_password?(@attr[:password]).should be_true
+end
+
+it"should return false"do
+@user.has_password?("invalid").should be_false
+end
+#-------------------------------------------------------
+describe "authendicate method" do
+
+it "should exist"do
+User.should respond_to(:authenticate)
+end
+
+it "should return nill on email password misss match"do
+User.authenticate(@attr[:email],"wrongpass").should be_nil
+end
+
+it"should returt nill for an email address with no user"do
+User.authenticate("bar@foo.com",@attr[:password]).should be_nil
+end
+
+it "should returnthe email/password match" do
+User.authenticate(@attr[:email],@attr[:password]).should == @user
+
+end
+
+
+end
 end
 end
 end
