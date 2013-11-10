@@ -17,6 +17,7 @@ gem 'sqlite3'
 group :test, :development do
   gem 'webrat'
   gem "rspec-rails", "~> 2.8"
+  gem "factory_girl_rails",'1.0'
 end
 
 
