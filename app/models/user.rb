@@ -18,6 +18,9 @@ email_regx=/\A[\w+\-.]+@[a-z.\d\-]+\.[a-z]+\Z/i
 def has_password?(submitted_password)
 encrypted_password == encrypt(submitted_password)
 end
+
+
+
 class << self
     def authenticate(email,submitted_password)
     user =find_by_email(email)
