@@ -9,20 +9,24 @@
 
 <div class ="container">
  <header>
-  <%= link_to   logo,
-    root_path %>
+   <%= link_to   logo,
+   root_path %>
    <nav class ="round">
    <ul>
-   <li><%= link_to "home",root_path%></li>
-<li><%= link_to "help",help_path%></li>
-<li><%= link_to "sign in",'#'%></li>
-
+      <li><%= link_to "home",root_path%></li>
+      <li><%= link_to "help",help_path%></li>
+      <li><%= link_to "sign in",'#'%></li>
 
    </ul>
-</nav>
+   </nav>
 </header>
 <section class ="round">
 
+<% flash.each do |key, value| %>
+
+<div class="flash<%= key %>"> <%= value %></div>
+
+<% end %>
 
 <%= yield %>
 </section>
