@@ -26,6 +26,13 @@ get '/signup'
 response.should have_selector('title',:content =>'sign up')
 end
 
+
+it "should have  sign in page at'/signin'"do
+get '/signin'
+response.should have_selector('title',:content =>'sign in')
+end
+
+
 it "should have the right links of the layouts"do
 visit root_path
 response.should have_selector('title',:content =>"Home")
