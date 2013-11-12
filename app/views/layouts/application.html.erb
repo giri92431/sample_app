@@ -14,9 +14,15 @@
    <nav class ="round">
    <ul>
       <li><%= link_to "home",root_path%></li>
+        <% if signed_in?%>
+        <li><%=link_to "profile", current_user %> </li>
+        <% end %> 
       <li><%= link_to "help",help_path%></li>
-      <li><%= link_to "sign in",'#'%></li>
-
+      <% if signed_in? %>
+       <li><%= link_to "sign out",signout_path%></li>
+      <% else %>
+       <li><%= link_to "sign in",signin_path%></li>
+      <% end %>
    </ul>
    </nav>
 </header>

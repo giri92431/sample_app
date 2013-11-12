@@ -2,7 +2,7 @@ SampleApp::Application.routes.draw do
  
   
  
-  resources :sessions,:only=>[:new,:create,:destory]
+  resources :sessions,:only=>[:new,:create,:destroy]
   resources :users 
 
   root :to => 'pages#home'
