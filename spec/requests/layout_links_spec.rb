@@ -90,6 +90,13 @@ describe"when sigined in"do
   end
 
 
+  it"should have a user link"do
+   visit root_path
+   response.should have_selector("a",:href=>users_path,
+                                      :content=>"Users")
+
+  end
+
 end
 
 
