@@ -112,6 +112,80 @@ describe"Post ''create'"do
   end
 #-----------------------------------------------
 end
+
+describe"'GET' edit"do
+
+  before(:each) do
+  @user =Factory(:user)
+  test_sign_in(@user)
+ end
+
+it"should be successful"do
+ get :edit, :id=>@user
+ response.should be_success
+end 
+
+it"should havethe right title"do
+ get :edit, :id=>@user
+ response.should have_selector('title',:content=>"Edit user")
+ end
+
+ it "should have  link to change the gravater"do
+  get :edit ,:id=>@user
+  response.should have_selector('a',:href=>'http://gravatar.com/emails',
+                                    :content=>"change")
+ end
+end
+#-------------------------------------
+describe"'Put' update "do 
+  
+   before(:each)do 
+    @user=Factory(:user)
+    test_sign_in(@user)
+    end 
+    #----------
+     describe"failure"do 
+       before(:each)do
+        @attr={:name=>"",:email=>"",:password=>"",:password_confirmation=>""}
+       end
+   
+     it "should render the edit page"do
+        put:update,:id=>@user,:user=>@attr
+        response.should  render_template('edit')
+       end 
+
+     it"should havethe right title"do
+     put :update, :id=>@user,:user=>@attr
+     response.should have_selector('title',:content=>"Edit user")
+     end
+  
+    end 
+  #--------------
+   describe"successes"do
+  
+      before(:each)do
+        @attr= {:name=>"New Name",:email=>"user@example.org",
+               :password=>"foofoo",:password_confirmation=>"foofoo"}
+      end
+   
+      it "should changethe user attribute"do
+       put :update,:id=>@user,:user=>@attr
+       user =assigns(:user)
+       @user.reload
+       @user.name.should == user.name   
+       @user.email.should== user.email
+       @user.encrypted_password.should == user.encrypted_password
+     end
+
+  it "should have a flash msg"do
+    put :update,:id=>@user,:user=>@attr
+      flash[:success].should =~/updated/
+   end
+
+end
+  #-------------------
+end
+#-----------------------------------
 end
 
 

@@ -74,13 +74,22 @@ describe"when sigined in"do
 
   end
 
-  it"should have aprofile link"do
+  it"should have a profile link"do
   visit root_path
    response.should have_selector("a" ,:href=>user_path(@user),
                                      :content=>"profile")
 
 
   end
+
+  it"should have a setting link"do
+   visit root_path
+   response.should have_selector("a",:href=>edit_user_path(@user),
+                                      :content=>"setting")
+
+  end
+
+
 end
 
 
