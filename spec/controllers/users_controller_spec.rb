@@ -193,7 +193,8 @@ describe"authenticate of edit/update action"do
  @user=Factory(:user)
  end
  
- 
+ describe"for non-sign-ni user"do
+
  it "should deny accesse to 'edit'"do
   get:edit,:id=>@user
   response.should redirect_to(signin_path)
@@ -205,17 +206,27 @@ it "should deny accesse to 'update'"do
   response.should redirect_to(signin_path)
  end
  
+end
 
+ describe"for sign-in user"do
+ 
+ before(:each)do
+  wrong_user =Factory(:user,:email=>"user@example.net")
+  test_sign_in(wrong_user)
+ end 
 
+ it"should require matching user for edit"do
+  get:edit,:id=>@user
+ response.should redirect_to(root_path) 
+ end
+ 
+it"should require matching user for update"do
+  put:update,:id=>@user,:user=>{}
+ response.should redirect_to(root_path)
+ end
+ 
 
-
-
-
-
-
-
-
-
+end
 
 
 
