@@ -183,9 +183,39 @@ describe"'Put' update "do
    end
 
 end
-  #-------------------
+  
 end
 #-----------------------------------
+
+describe"authenticate of edit/update action"do
+  
+ before(:each)do
+ @user=Factory(:user)
+ end
+ 
+ 
+ it "should deny accesse to 'edit'"do
+  get:edit,:id=>@user
+  response.should redirect_to(signin_path)
+ end
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+end
+#---------------------------------------
 end
 
 
