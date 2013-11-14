@@ -26,7 +26,9 @@ end
    current_user =nil 
   end
 
-
+  def deny_accesses
+   redirect_to signin_path,:notice=>"please sign in to access this page"
+  end
  
 
   private

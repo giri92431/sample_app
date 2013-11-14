@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate,:only=>[:edit]
+  before_filter :authenticate,:only=>[:edit,:update]
   def show 
   @user =User.find(params[:id])
   @title=@user.name
@@ -49,12 +49,11 @@ end
 private
  
  def authenticate
-  redirect_to signin_path unless signed_in?
+  deny_accesses unless signed_in?
+ end
 
+  
 end
-
-end
-
 
 
 

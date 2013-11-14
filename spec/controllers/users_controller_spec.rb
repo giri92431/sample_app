@@ -197,9 +197,14 @@ describe"authenticate of edit/update action"do
  it "should deny accesse to 'edit'"do
   get:edit,:id=>@user
   response.should redirect_to(signin_path)
+  flash[:notice].should =~/sign in/i
  end
  
-
+it "should deny accesse to 'update'"do
+  put:update,:id=>@user,:user=>{}
+  response.should redirect_to(signin_path)
+ end
+ 
 
 
 
