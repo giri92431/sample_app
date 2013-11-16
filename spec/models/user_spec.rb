@@ -1,6 +1,7 @@
-require 'spec_helper'
+require 'spec_helper' 
 
-describe User do
+
+describe User do #1
 
 before(:each)do
 @attr = {:name=>"example users",
@@ -105,7 +106,7 @@ end
 end
 
 #-----------------------------------------------------
-describe "password encription"do
+describe "password encription"do #3
 
 before (:each)do
 @user=User.create!(@attr)
@@ -124,7 +125,7 @@ it"should have a salt "do
 end
 
 #----------------------------------------------------------
-describe"has password method"do
+describe"has password method"do #4
 
 it"should exist"do
 @user.should respond_to(:has_password?)
@@ -154,18 +155,43 @@ end
 
 it "should returnthe email/password match" do
 User.authenticate(@attr[:email],@attr[:password]).should == @user
-
 end
 
 
 end
+#-----------------------------------------------------
 
+end #3
+end #4
 #-----------------------------------------------------------
-end
-end
-end
+describe"micropost association"do
+ before(:each)do
+  @user=User.create(@attr)
+  @mp1=Factory(:micropost,:user=>@user,:created_at =>1.day.ago)
+  @mp2=Factory(:micropost,:user=>@user,:created_at =>1.hour.ago)
+ end
 
+  it"shohould have a micropost attributes"do
+   @user.should respond_to(:microposts)
+  end
+  
 
+   it"should have the rit micropost int he rit order"do
+    @user.microposts.should == [@mp2,@mp1]
+   end
+  
+   it"should destory associated microposts"do
+    @user.destroy
+     [@mp1,@mp2].each do|micropost|
+
+     lambda do
+      Micropost.find(micropost)
+      end.should raise_error(ActiveRecord::RecordNotFound)
+     end
+    end
+end
+ #-------------------------------------
+end #1
 
 
 
