@@ -7,7 +7,7 @@ describe Micropost do
   end
 
 it"should create a instancewith valid attributes"do
-Micropost.create!(@attr)
+ @user.microposts.create!(@attr)
 end
 
 describe"user association"do
@@ -30,6 +30,18 @@ describe"user association"do
 
 end
 
+  describe "validation" do
+    it"should have a user id "do
+     Micropost.new(@attr).should_not be_valid
+    end
+   
+    it"should require a non blank content"do
+      @user.microposts.build(:content =>"   ").should_not be_valid
+     end
 
+   it"should reject long content"do
+    @user.microposts.build(:content =>"a"*141).should_not be_valid
+   end
 
+end
 end
