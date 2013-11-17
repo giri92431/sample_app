@@ -30,6 +30,10 @@ end
    user==current_user
    end
 
+    def authenticate
+     deny_accesses unless signed_in?
+    end
+
    def deny_accesses
    store_location
    redirect_to signin_path,:notice=>"please sign in to access this page"

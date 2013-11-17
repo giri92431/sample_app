@@ -1,7 +1,26 @@
+ <% if signed_in?%>
 
- <body>
-   <h1>sample app</h1>
- <p>this is the home page for the sample app</p>
+ <table class="front" summary="for signed-in users"></table>
+   <tr> 
+      <td class="main">
+      <h1 class="micropost">Wat's up!</h1> 
+      </td>
+       <%= render 'shared/micropost_form' %>
+     <td class="Sidebar_round">
+    <%= render 'shared/user_info'%> 
+     </td>
+   </tr>
+ <% else %>
+
+
+   <h1 > web application</h1>
+  <p><h2>Developed on ruby-1.9.2p320 and rails-3.2.6 </h2><br>
+    <h3>this is a complete test driven web development sample</h3>
+        
+  </p>
  
 
 <%= link_to"sign up now!",signup_path,:class=>"signup_button round"%>
+
+
+<% end %>
