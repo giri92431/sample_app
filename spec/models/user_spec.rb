@@ -209,7 +209,75 @@ describe"micropost association"do #5
       
    end
   #-----------------
-end #5
+end  #5
+#--------------------------------------
+  describe "relationships"do
+    
+   before(:each) do
+   @user=User.create!(@attr)
+   @followed =Factory(:user)
+   end
+   
+    it"should have a relationship method"do
+    @user.should respond_to(:relationships)
+    end
+
+    
+   it"should have a folowing method"do
+   @user.should respond_to(:following)
+   end
+
+   it"should folloe another user"do
+   @user.follow!(@followed)
+   @user.should be_following(@followed)
+   end
+
+  it"should include the folllowed user in th following array"do
+  @user.follow!(@followed)
+  @user.following.should include(@followed)
+  end
+
+  it "shoulf have an unfollow! method"do
+   @user.should respond_to(:unfollow!)
+   end
+
+  it"should unfollow user"do
+  @user.follow!(@followed)
+  @user.unfollow!(@followed)
+  @user.should_not be_following(@followed)
+  end
+
+
+ it"should have a reverse relationship method" do
+  @user.should respond_to(:reverse_relationships)
+ end
+  
+ it"should have a followers method"do
+ @user.should respond_to(:followers)
+ end
+
+it"should include the folllower  in th following array"do
+  @user.follow!(@followed)
+  @followed.followers.should include(@user)
+  end
+
+
+  
+  
+
+ 
+
+
+
+
+
+
+
+
+
+
+  end
+
  #-------------------------------------
 end #1
 
