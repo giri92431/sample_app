@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :authenticate,:only=>[:index,:edit,:update,:destroy]
+  before_filter :authenticate,:only=>[:index,:edit,:update,:destroy,:following,
+                                       :followers]
   before_filter :correct_user,:only=>[:edit,:update]
   before_filter :admin_user,  :only=> :destroy
  
@@ -11,6 +12,26 @@ class UsersController < ApplicationController
   @title=@user.name
   end
  
+
+ def following
+ @title ="Following"
+ @user =User.find(params[:id])
+ @users=@user.following.paginate(page: params[:page])
+ render 'show_follow'
+ end
+
+
+ def followers
+ @title ="Followers"
+ @user =User.find(params[:id])
+ @users=@user.followers.paginate(page: params[:page])
+ render 'show_follow'
+
+ end
+
+
+
+
   def index
   @users=User.paginate(:page =>params[:page])
   @title="all users"
