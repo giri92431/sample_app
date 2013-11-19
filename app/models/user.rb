@@ -35,7 +35,7 @@ encrypted_password == encrypt(submitted_password)
 end
 #micropost----------
 def feed
-Micropost.where("user_id =?",id)
+Micropost.from_users_followed_by(self)
 
 end
 #---------------

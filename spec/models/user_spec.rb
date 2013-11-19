@@ -206,6 +206,15 @@ describe"micropost association"do #5
                    :user=> Factory(:user,:email=> Factory.next(:email))) 
       @user.feed.should_not include(mp3)
       end
+
+     it"should include micropost of followed user"do
+      followed = Factory(:user,:email =>Factory.next(:email))
+      mp3=Factory(:micropost, :user=>followed)
+      @user.follow!(followed)
+      @user.feed.should include(mp3)
+     end 
+
+
       
    end
   #-----------------
