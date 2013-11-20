@@ -12,7 +12,7 @@ gem 'will_paginate', '3.0.3'
 # Gems used only for assets and not required
 # in production environments by default.
 
-
+gem "faker",'0.3.1'
 
 
 group :test, :development do
@@ -20,7 +20,7 @@ group :test, :development do
   gem 'webrat'
   gem "rspec-rails", "~> 2.8"
   gem "factory_girl_rails",'1.0'
-  gem "faker",'0.3.1'
+  
 end
 
 
